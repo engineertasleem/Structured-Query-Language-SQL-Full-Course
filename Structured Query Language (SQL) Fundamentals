@@ -126,3 +126,4 @@ Get customers and their orders:
 SELECT Customers.FirstName, Customers.LastName, Orders.Product
 FROM Customers
 JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
