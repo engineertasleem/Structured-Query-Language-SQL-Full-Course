@@ -1,0 +1,128 @@
+1. What is a Database?
+A database is like a digital filing cabinet where you store and organize data. For example, you can store information about customers, products, or orders.
+
+2. What is SQL?
+SQL is a language used to talk to databases. You can use it to:
+
+Create data (add new information).
+Read data (retrieve information).
+Update data (change existing information).
+Delete data (remove information).
+
+3. Basic SQL Commands
+Here are the most common SQL commands:
+
+a. CREATE TABLE
+Used to create a new table in the database.
+
+CREATE TABLE Customers (
+    CustomerID INT,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100)
+);
+
+Customers is the table name.
+CustomerID, FirstName, LastName, and Email are columns.
+INT and VARCHAR are data types (integer and text).
+
+b. INSERT INTO
+Used to add new rows of data to a table.
+
+INSERT INTO Customers (CustomerID, FirstName, LastName, Email)
+VALUES (1, 'John', 'Doe', 'john.doe@example.com');
+This adds a new customer to the Customers table.
+
+c. SELECT
+Used to retrieve data from a table.
+
+SELECT * FROM Customers;
+* means "all columns". This will show all rows and columns from the Customers table.
+
+To select specific columns:
+
+SELECT FirstName, LastName FROM Customers;
+
+d. WHERE
+Used to filter data based on a condition.
+
+SELECT * FROM Customers WHERE CustomerID = 1;
+This retrieves only the customer with CustomerID = 1.
+
+e. UPDATE
+Used to modify existing data in a table.
+
+UPDATE Customers
+SET Email = 'john.new@example.com'
+WHERE CustomerID = 1;
+This updates the email of the customer with CustomerID = 1.
+
+f. DELETE
+Used to remove data from a table.
+
+DELETE FROM Customers WHERE CustomerID = 1;
+This deletes the customer with CustomerID = 1.
+
+4. Advanced SQL Concepts
+a. ORDER BY
+
+Used to sort the results.
+
+SELECT * FROM Customers ORDER BY LastName ASC;
+ASC means ascending (A-Z), DESC means descending (Z-A).
+
+b. JOIN
+Used to combine data from two or more tables.
+
+SELECT Orders.OrderID, Customers.FirstName, Customers.LastName
+FROM Orders
+JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+This retrieves order details along with customer names by joining the Orders and Customers tables.
+
+c. GROUP BY
+Used to group rows with the same values.
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country;
+This counts the number of customers in each country.
+
+d. HAVING
+Used to filter groups (similar to WHERE but for groups).
+
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 10;
+This shows only countries with more than 10 customers.
+
+5. Example Database
+Let’s create a simple database with two tables: Customers and Orders.
+
+Customers Table
+CustomerID	FirstName	LastName	Email
+
+1	John	Doe	john.doe@example.com
+2	Jane	Smith	jane.smith@example.com
+
+Orders Table
+
+OrderID	CustomerID	Product	Quantity
+101	1	Laptop	1
+102	2	Phone	2
+
+6. Practice Queries
+Get all customers:
+
+SELECT * FROM Customers;
+Get all orders for customer with ID 1:
+
+SELECT * FROM Orders WHERE CustomerID = 1;
+Get the total number of orders:
+
+SELECT COUNT(*) AS TotalOrders FROM Orders;
+Get customers and their orders:
+
+SELECT Customers.FirstName, Customers.LastName, Orders.Product
+FROM Customers
+JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
