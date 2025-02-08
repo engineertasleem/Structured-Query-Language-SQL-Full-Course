@@ -1,0 +1,94 @@
+1. Basic SELECT Queries
+
+Retrieve all columns from the employees table.
+Retrieve only the first_name and last_name columns from the employees table.
+Retrieve unique values from the department column in the employees table.
+
+2. Filtering Data (WHERE Clause)
+Retrieve all employees from the employees table who work in the "Sales" department.
+Retrieve all employees who have a salary greater than 50000.
+Retrieve all employees who were hired after January 1, 2020.
+Retrieve all employees whose last_name starts with the letter "S".
+
+3. Sorting Data (ORDER BY Clause)
+Retrieve all employees sorted by their last_name in ascending order.
+Retrieve all employees sorted by their salary in descending order.
+Retrieve all employees sorted by their department in ascending order and then by salary in descending order.
+
+4. Aggregations (GROUP BY, HAVING)
+Find the total number of employees in the employees table.
+Find the average salary of employees in each department.
+Find the highest salary in the employees table.
+Find the number of employees in each department, but only include departments with more than 10 employees.
+
+5. Joins
+Retrieve the first_name, last_name, and department_name for all employees by joining the employees table with the departments table (assume a common column like department_id exists).
+Retrieve all employees who have not been assigned to a department (use a LEFT JOIN and check for NULL in the department_name column).
+
+6. Subqueries
+Retrieve all employees whose salary is greater than the average salary of all employees.
+Retrieve all employees who work in a department that has more than 5 employees.
+
+7. Updating Data (UPDATE Statement)
+Update the salary of all employees in the "Sales" department to 55000.
+Update the department_id of an employee with employee_id = 101 to 3.
+
+8. Inserting Data (INSERT Statement)
+Insert a new employee into the employees table with the following details:
+first_name: "John"
+last_name: "Doe"
+salary: 60000
+department_id: 2
+hire_date: "2023-10-01"
+
+9. Deleting Data (DELETE Statement)
+Delete all employees who have a salary less than 30000.
+Delete all employees who were hired before January 1, 2015.
+
+10. Combining Concepts
+Retrieve the first_name, last_name, and department_name of employees who earn more than the average salary in their respective departments.
+Retrieve the top 5 highest-paid employees along with their department names.
+
+Sample Table Structures
+Here’s an example of what the employees and departments tables might look like:
+
+employees
+employee_id	first_name	last_name	salary	department_id	hire_date
+1	John	Doe	60000	2	2023-10-01
+2	Jane	Smith	75000	1	2020-05-15
+departments
+department_id	department_name
+1	Sales
+2	Marketing
+
+Solutions (Outline)
+Here’s a quick outline of how you might solve some of these problems:
+
+SELECT * FROM employees;
+SELECT first_name, last_name FROM employees;
+SELECT DISTINCT department FROM employees;
+SELECT * FROM employees WHERE department = 'Sales';
+SELECT * FROM employees WHERE salary > 50000;
+SELECT * FROM employees WHERE hire_date > '2020-01-01';
+SELECT * FROM employees WHERE last_name LIKE 'S%';
+SELECT * FROM employees ORDER BY last_name ASC;
+SELECT * FROM employees ORDER BY salary DESC;
+SELECT * FROM employees ORDER BY department ASC, salary DESC;
+SELECT COUNT(*) FROM employees;
+SELECT department, AVG(salary) FROM employees GROUP BY department;
+SELECT MAX(salary) FROM employees;
+SELECT department, COUNT(*) FROM employees GROUP BY department HAVING COUNT(*) > 10;
+SELECT e.first_name, e.last_name, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id;
+SELECT e.first_name, e.last_name FROM employees e LEFT JOIN departments d ON e.department_id = d.department_id WHERE d.department_name IS NULL;
+SELECT * FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);
+SELECT * FROM employees WHERE department_id IN (SELECT department_id FROM employees GROUP BY department_id HAVING COUNT(*) > 5);
+UPDATE employees SET salary = 55000 WHERE department = 'Sales';
+UPDATE employees SET department_id = 3 WHERE employee_id = 101;
+INSERT INTO employees (first_name, last_name, salary, department_id, hire_date) VALUES ('John', 'Doe', 60000, 2, '2023-10-01');
+DELETE FROM employees WHERE salary < 30000;
+DELETE FROM employees WHERE hire_date < '2015-01-01';
+SELECT e.first_name, e.last_name, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id WHERE e.salary > (SELECT AVG(salary) FROM employees WHERE department_id = e.department_id);
+SELECT e.first_name, e.last_name, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id ORDER BY e.salary DESC LIMIT 5;
+
+
+
